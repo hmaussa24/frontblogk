@@ -75,3 +75,93 @@
     justify-content: center;
     margin: auto;
 }
+
+.name {
+    float: right;
+    font-size: 16px;
+}
+
+.listitem {
+    text-align: left;
+    width: 70%;
+    margin: auto;
+}
+
+center{
+    margin: auto;
+    text-align: center;
+}
+
+.imagen {
+    float: left;
+    margin-top: 40px;
+}
+
+.texto{
+    float: right;
+    font-size: 18px;
+    text-align: justify;
+    margin-top: 20px;
+    width: 90%;
+}
+
+.post{
+    width: 75%;
+    margin: auto;
+    float: left;
+}
+
+.postlist{
+    width: 20%;
+    float: right;
+    margin-right: 0px;
+    border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    border: 0px solid #000000;
+    background-color: #dbdbdb;
+    height: 100%;
+
+}
+
+
+
+.texolist{
+    width: 70%;
+}
+
+.list-item{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+
+.listausers{
+    width: 400px;
+    margin: auto;
+    text-align: left;
+}
+
+.listacomentarios{
+    width: 600px;
+    margin: auto;
+    text-align: left;
+}
+
+.addtag{
+    width: 30%;
+    text-align: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.tag{
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    font-size: 15px;  
+}
+.texto-cat{
+    margin-top: 15px;
+}

@@ -25,12 +25,11 @@ const { Content} = Layout;
 function Login(props) {
     return (
         <Layout className="layout">
-            <Head logo='logo' login={false}/>
+            <Head logo='logo' menu={false}/>
 
             <Content className='container'>
                 <div className="site-layout-content">
                     <h2 className="titulo" >Iniciar sesión</h2>
-                    {props.isSend && <Spin clase="example" /> } 
                     <Form
                         {...layout}
                         name="basic"

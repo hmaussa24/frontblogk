@@ -9,7 +9,7 @@ function InputBuscar(props) {
             <br />
             <br />
             <Search
-                placeholder="Puedes buscar por Codigo o por Nombre"
+                placeholder="Puedes buscar titulo"
                 enterButton="Buscar"
                 size="large"
                 onSearch={value => props.buscar(value)}

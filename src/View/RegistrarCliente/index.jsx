@@ -3,6 +3,7 @@ import RegistraCliente from './RegistrarCliente'
 import { connect } from 'react-redux'
 import { authLogin, profile } from '../../store/actions/'
 import Axios from 'axios'
+import {messageLoadin, messageOk} from '../../Component/Messages'
 function Index(props) {
     const [isSend, setSend] = useState(false)
     const [id, setId] = useState(null)
@@ -10,6 +11,7 @@ function Index(props) {
     const onFinish = async (values) => {
         console.log(values);
         setSend(true)
+        messageLoadin()
         //Axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('jwt_token')}`;
         await Axios.post('http://127.0.0.1:8000/api/auth/signup', values)
             .then(response => {
@@ -18,7 +20,8 @@ function Index(props) {
                 //setId(response.data.id.id)
                 if(response.data.message){
                     setSave(response.data.message)
-                    alert('Cliente guardado!')
+                    //alert('Cliente guardado!')
+                    messageOk()
                     props.history.push('/')
                 }else{
                     alert('Cliente no guardado, intentao nuevamente')

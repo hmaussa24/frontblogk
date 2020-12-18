@@ -4,7 +4,9 @@ import Titulo from '../../Component/Titulo'
 import Spin from '../../Component/Spin'
 import 'antd/dist/antd.css';
 import '../../resources/Productos.css'
-import { Form, Input, InputNumber, Button, Layout } from 'antd';
+import PicturesWall from '../../Component/UploadFoto'
+import { Form, Input, Select, Button, Layout } from 'antd';
+const { TextArea } = Input;
 const layout = {
     labelCol: {
         span: 8,
@@ -22,17 +24,18 @@ const validateMessages = {
 };
 const { Content } = Layout;
 function RegistrarCliente(props) {
+
     return (
         <Layout className="layout">
-            <Head logo='logo' menu={false} key='2' />
+            <Head logo='logo' menu={true} key='2' />
 
             <Content className='container'>
-                <Titulo class='site-page-header' titulo='Registro de Usuarios' subtitulo='Para poder acceder a los post debes registrate.'></Titulo>
+                <Titulo class='site-page-header' titulo='Publicar Post' subtitulo='En este modulo podras crear tus post y subir una imagen.'></Titulo>
                 <Form className='form-producto' {...layout} name="nest-messages" onFinish={props.onFinish} validateMessages={validateMessages}>
 
                     <Form.Item
-                        name='name'
-                        label="Nombre del Cliente"
+                        name='titulo'
+                        label="Titulo"
                         rules={[
                             {
                                 required: true,
@@ -42,38 +45,37 @@ function RegistrarCliente(props) {
                         <Input />
                     </Form.Item>
                     <Form.Item
-                        name='telefono'
-                        label="telefono"
+                        name='texto_corto'
+                        label="Texto"
                         rules={[
                             {
                                 required: true,
                             },
                         ]}
                     >
-                        <Input />
+                        <TextArea rows={5} />
                     </Form.Item>
                     <Form.Item
-                        name='email'
-                        label="E-mail"
-                        rules={[
-                            {
-                                type: 'email',
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        label="Contraseña"
-                        name="password"
+                        name='texto_largo'
+                        label="Texto"
                         rules={[
                             {
                                 required: true,
-                                message: 'Porfavor ingrese su contraseña!',
                             },
                         ]}
                     >
-                        <Input.Password />
+                        <TextArea rows={10} />
+                    </Form.Item>
+                    <Form.Item label="Categorias" name='categoria' >
+                        <Select>
+                            {props.categorias ?
+
+                                props.categorias.map((categoria) => (
+                                    <Select.Option value={categoria.id} key={categoria.id}>{categoria.name}</Select.Option>
+                                ))
+
+                                : null}
+                        </Select>
                     </Form.Item>
                     <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                         <Button type="primary" htmlType="submit">
@@ -82,6 +84,7 @@ function RegistrarCliente(props) {
                         </Button>
                     </Form.Item>
                 </Form>
+                {props.isSave  ? <div className='foto'><PicturesWall tipo_user={props.tipo_user}/></div> : null}
             </Content>
         </Layout>
 

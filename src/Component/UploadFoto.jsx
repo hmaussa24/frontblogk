@@ -2,6 +2,7 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import { Upload, message } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { Redirect } from 'react-router';
 
 
 function getBase64(img, callback) {
@@ -39,7 +40,9 @@ class Avatar extends React.Component {
           imageUrl,
           loading: false,
         }),
+
       );
+      return <Redirect to='/admin'  />
     }
   };
 
@@ -67,5 +70,4 @@ class Avatar extends React.Component {
   }
 }
 
-  export default Avatar
-  
+export default Avatar

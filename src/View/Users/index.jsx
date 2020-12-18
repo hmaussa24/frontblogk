@@ -4,49 +4,61 @@ import { connect } from 'react-redux'
 import { authLogin, profile } from '../../store/actions/'
 import Spin from '../../Component/Spin'
 import Axios from 'axios'
-import {messageLoadin, messageOk} from '../../Component/Messages'
+import { messageOk, messageLoadin } from '../../Component/Messages'
 function Index(props) {
-    const [loading, setLoading] = useState(false)
-    const [posts, setPosts] = useState([])
+    const [users, setUsers] = useState([])
     useEffect(() => {
         if (Object.entries(props.login).length === 0) {
             props.history.push('/')
         } else {
-            const posts = async () => {
+            const users = async () => {
                 messageLoadin()
                 Axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('jwt_token')}`
-                await Axios.get('http://127.0.0.1:8000/api/auth/get-posts')
+                await Axios.get('http://127.0.0.1:8000/api/auth/get-users')
                     .then(response => {
-                        setPosts(response.data.posts)
+                        setUsers(response.data.users)
                         messageOk()
                     }, error => {
                         alert('No se cargaron los datos')
                     })
             }
 
-            posts()
+            users()
 
         }
 
     }, [])
 
     const handledBuscar = async e => {
-        if (e.length > 0) {
+        if (e.length >= 0) {
             messageLoadin()
-            Axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('jwt_token')}`
-            await Axios.post('http://127.0.0.1:8000/api/auth/buscar-post', { buscar: e })
+
+            await Axios.post('http://127.0.0.1:8000/api/auth/get-users-by-name', {buscar: e})
                 .then(response => {
-                    setPosts(response.data.posts)
-                    messageOk()
+                    setUsers(response.data.users)
+                    messageLoadin()
                 }, error => {
                     alert('No se cargaron los datos')
                 })
 
         }
     }
+
+    const eliminar = async (id) => {
+        messageLoadin()
+        await Axios.post('http://127.0.0.1:8000/api/auth/delete-user', { id: id })
+            .then(response => {
+               // alert('Post eliminado!')
+                setUsers(response.data.users)
+                messageOk()
+            }, error => {
+                alert('No se cargaron los datos')
+            })
+    }
+
     return (
         <div className='spin'>
-           <Home posts={posts} handledBuscar={handledBuscar} ></Home>
+            <Home users={users} handledBuscar={handledBuscar} eliminar={eliminar}></Home>
 
         </div>
 

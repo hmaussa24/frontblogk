@@ -32,12 +32,12 @@ function Index(props) {
 
     const handledBuscar = async e => {
         if (e.length > 0) {
-            messageLoadin()
+            setLoading(true)
             Axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('jwt_token')}`
             await Axios.post('http://127.0.0.1:8000/api/auth/buscar-post', { buscar: e })
                 .then(response => {
                     setPosts(response.data.posts)
-                    messageOk()
+                    setLoading(false)
                 }, error => {
                     alert('No se cargaron los datos')
                 })
@@ -46,7 +46,7 @@ function Index(props) {
     }
     return (
         <div className='spin'>
-           <Home posts={posts} handledBuscar={handledBuscar} ></Home>
+            <Home posts={posts} handledBuscar={handledBuscar} ></Home>
 
         </div>
 
